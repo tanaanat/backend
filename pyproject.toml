@@ -1,0 +1,26 @@
+[project]
+name = "fastapi-deploy-sample"
+version = "0.1.0"
+description = "Add your description here"
+authors = [
+    { name = "tanaanat", email = "takumadagu@gmail.com" }
+]
+dependencies = [
+    "fastapi[standard]>=0.115.4",
+]
+readme = "README.md"
+requires-python = ">= 3.11"
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.rye]
+managed = true
+dev-dependencies = []
+
+[tool.hatch.metadata]
+allow-direct-references = true
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/fastapi_deploy_sample"]

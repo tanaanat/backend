@@ -6,7 +6,7 @@ authors = [
     { name = "tanaanat", email = "takumadagu@gmail.com" }
 ]
 dependencies = [
-    "fastapi[standard]>=0.115.5",
+    "fastapi[standard]>=0.115.6",
     "uvicorn>=0.32.1",
     "pgcli>=4.1.0",
     "sqlalchemy>=2.0.36",

@@ -11,6 +11,7 @@ dependencies = [
     "pgcli>=4.1.0",
     "sqlalchemy>=2.0.36",
     "psycopg[binary]>=3.2.3",
+    "ulid>=1.1",
 ]
 readme = "README.md"
 requires-python = ">= 3.11"

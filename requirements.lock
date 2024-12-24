@@ -110,6 +110,8 @@ typing-extensions==4.12.2
     # via pydantic-core
     # via sqlalchemy
     # via typer
+ulid==1.1
+    # via backend
 uvicorn==0.32.1
     # via backend
     # via fastapi

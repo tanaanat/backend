@@ -1,0 +1,115 @@
+annotated-types==0.7.0
+    # via pydantic
+anyio==4.6.2.post1
+    # via httpx
+    # via starlette
+    # via watchfiles
+certifi==2024.8.30
+    # via httpcore
+    # via httpx
+cli-helpers==2.3.1
+    # via pgcli
+click==8.1.7
+    # via pgcli
+    # via pgspecial
+    # via typer
+    # via uvicorn
+configobj==5.0.9
+    # via cli-helpers
+    # via pgcli
+dnspython==2.7.0
+    # via email-validator
+email-validator==2.2.0
+    # via fastapi
+fastapi==0.115.6
+    # via backend
+fastapi-cli==0.0.5
+    # via fastapi
+greenlet==3.1.1
+    # via sqlalchemy
+h11==0.14.0
+    # via httpcore
+    # via uvicorn
+httpcore==1.0.7
+    # via httpx
+httptools==0.6.4
+    # via uvicorn
+httpx==0.28.0
+    # via fastapi
+idna==3.10
+    # via anyio
+    # via email-validator
+    # via httpx
+jinja2==3.1.4
+    # via fastapi
+markdown-it-py==3.0.0
+    # via rich
+markupsafe==3.0.2
+    # via jinja2
+mdurl==0.1.2
+    # via markdown-it-py
+pgcli==4.1.0
+    # via backend
+pgspecial==2.1.3
+    # via pgcli
+prompt-toolkit==3.0.48
+    # via pgcli
+psycopg==3.2.3
+    # via backend
+    # via pgcli
+    # via pgspecial
+psycopg-binary==3.2.3
+    # via psycopg
+pydantic==2.10.1
+    # via fastapi
+pydantic-core==2.27.1
+    # via pydantic
+pygments==2.18.0
+    # via cli-helpers
+    # via pgcli
+    # via rich
+python-dotenv==1.0.1
+    # via uvicorn
+python-multipart==0.0.18
+    # via fastapi
+pyyaml==6.0.2
+    # via uvicorn
+rich==13.9.4
+    # via typer
+setproctitle==1.3.4
+    # via pgcli
+shellingham==1.5.4
+    # via typer
+sniffio==1.3.1
+    # via anyio
+sqlalchemy==2.0.36
+    # via backend
+sqlparse==0.5.2
+    # via pgcli
+    # via pgspecial
+starlette==0.41.3
+    # via fastapi
+tabulate==0.9.0
+    # via cli-helpers
+typer==0.14.0
+    # via fastapi-cli
+typing-extensions==4.12.2
+    # via fastapi
+    # via psycopg
+    # via pydantic
+    # via pydantic-core
+    # via sqlalchemy
+    # via typer
+uvicorn==0.32.1
+    # via backend
+    # via fastapi
+    # via fastapi-cli
+uvloop==0.21.0
+    # via uvicorn
+watchfiles==1.0.0
+    # via uvicorn
+wcwidth==0.2.13
+    # via prompt-toolkit
+    # via tabulate
+websockets==14.1
+    # via uvicorn

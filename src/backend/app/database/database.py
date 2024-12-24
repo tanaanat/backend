@@ -1,16 +1,8 @@
-import { createClient } from '@supabase/supabase-js';
 from sqlalchemy import create_engine
 from sqlalchemy.orm import Session
-from models import User
-
-#環境変数からURLとキーを取得
-const supabaseUrl = process.env.SUPABASE_URL;
-const supabaseKey = process.env.SUPABASE_KEY;
-
-#Supabaseクライアントを作成
-const supabase = createClient(supabaseUrl, supabaseKey);
-
-export default supabase;
+from ..model.table import User
+# 接続先DBの設定
+DATABASE = 'postgresql+psycopg://user:postgres@localhost:5432/postgres'
 
 # Engine の作成
 Engine = create_engine(

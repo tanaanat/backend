@@ -78,6 +78,8 @@ psycopg==3.2.3
     # via pgspecial
 psycopg-binary==3.2.3
     # via psycopg
+psycopg2-binary==2.9.10
+    # via backend
 pydantic==2.10.1
     # via fastapi
 pydantic-core==2.27.1

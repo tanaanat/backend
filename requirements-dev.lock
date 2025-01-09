@@ -18,6 +18,9 @@ anyio==4.6.2.post1
 certifi==2024.8.30
     # via httpcore
     # via httpx
+    # via requests
+charset-normalizer==3.4.1
+    # via requests
 cli-helpers==2.3.1
     # via pgcli
 click==8.1.7
@@ -51,6 +54,7 @@ idna==3.10
     # via anyio
     # via email-validator
     # via httpx
+    # via requests
 jinja2==3.1.4
     # via fastapi
 mako==1.3.8
@@ -88,6 +92,8 @@ python-multipart==0.0.18
     # via fastapi
 pyyaml==6.0.2
     # via uvicorn
+requests==2.32.3
+    # via backend
 rich==13.9.4
     # via typer
 setproctitle==1.3.4
@@ -118,6 +124,8 @@ typing-extensions==4.12.2
     # via typer
 ulid==1.1
     # via backend
+urllib3==2.3.0
+    # via requests
 uvicorn==0.32.1
     # via backend
     # via fastapi

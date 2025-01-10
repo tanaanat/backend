@@ -1,13 +1,9 @@
 import requests
-from fastapi import FastAPI,Body
+from fastapi import FastAPI, Body
 from pydantic import BaseModel
-from fastapi import HTTPException
-from .app.database.database import read_table  #インポートする時 "."を前に着ける
-from .app.database.database import read_id
 from fastapi.middleware.cors import CORSMiddleware
-from .app.database.database import delete_user
-from .app.model.table import User
-from .app.database.database import create_user
+from .app.database.database import session
+from .app.model.table import User, Match, MatchComment
 
 app = FastAPI()
 
@@ -19,57 +15,52 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
+RIOT_API_KEY = "RGAPI-7383bee5-bd31-4810-863d-c8a255448c76"  # APIキーを.envに管理推奨
 
-class Item(BaseModel):
-    name: str
-    price: float
-    is_offer: bool = None
+class RiotAccount(BaseModel):
+    gameName: str
+    tagLine: str
 
+class MatchCommentRequest(BaseModel):
+    match_id: str
+    comment: str
 
-@app.get("/")
-def read_root():
-    return {"Hello": "World"}
+# プレイヤー情報取得エンドポイント
+@app.post("/riot/account")
+def get_riot_account(account: RiotAccount):
+    url = f"https://asia.api.riotgames.com/riot/account/v1/accounts/by-riot-id/{account.gameName}/{account.tagLine}"
+    headers = {"X-Riot-Token": RIOT_API_KEY}
+    response = requests.get(url, headers=headers)
+    if response.status_code == 200:
+        data = response.json()
+        new_user = User(id=data['puuid'], game_name=account.gameName, tag_line=account.tagLine)
+        session.add(new_user)
+        session.commit()
+        return data
+    else:
+        return {"error": "Failed to retrieve account information"}
 
+# 試合履歴取得エンドポイント
+@app.get("/riot/matches/{puuid}")
+def get_match_history(puuid: str):
+    url = f"https://asia.api.riotgames.com/val/match/v1/matchlists/by-puuid/{puuid}"
+    headers = {"X-Riot-Token": RIOT_API_KEY}
+    response = requests.get(url, headers=headers)
+    if response.status_code == 200:
+        match_data = response.json()
+        for match in match_data['history']:
+            new_match = Match(id=match['matchId'], puuid=puuid, map_name="Unknown", game_mode="Unknown",
+                              score=0, kills=0, deaths=0, assists=0, headshot_percentage=0.0)
+            session.add(new_match)
+        session.commit()
+        return match_data
+    else:
+        return {"error": "Failed to retrieve match history"}
 
-@app.get("/items/{item_id}")
-def read_item(item_id: int, q: str = None):
-    return {"item_id": item_id, "q": q}
-
-
-@app.put("/items/{item_id}")
-def update_item(item_id: int, item: Item):
-    return {"item_name": item.name, "item_id": item_id}
-
-
-
-@app.get("/database")
-def read_user(): 
-    return read_table()
-    #datebase と名前変える
-
-@app.get("/users/{id}")
-def getuser_id(id:int): 
-    return read_id(id)
-
-# ユーザー追加エンドポイント（POSTメソッド）
-@app.post("/post")
-def create_users(id: int = Body(...),name: str = Body(...),age: str = Body(...)):
-    user=User(id=id,name=name,age=age)  
-    create_user(user)
-    return create_user(user)
-
-# ユーザー削除エンドポイント（DELETEメソッド）
-# @app.delete("/delete/{id}")
-# def delete_userid(id:int):
-#     delete_user(id)
-#     result = delete_user(id)  # 実際に削除する処理
-#     if not result:
-#         raise HTTPException(status_code=404, detail="ユーザーが見つかりません")
-#     return{"message": f"ユーザー {id} が削除されました"}
-
-@app.delete("/delete/{id}")
-def delete_userid(id:int):
-    return delete_user(id)
+# コメント追加エンドポイント
+@app.post("/match/comment")
+def add_match_comment(request: MatchCommentRequest):
+    new_comment = MatchComment(match_id=request.match_id, comment=request.comment)
+    session.add(new_comment)
+    session.commit()
+    return {"message": "Comment added successfully"}

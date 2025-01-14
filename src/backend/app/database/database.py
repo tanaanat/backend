@@ -1,41 +1,16 @@
 from sqlalchemy import create_engine
-from sqlalchemy.orm import Session
-from ..model.table import User
-# 接続先DBの設定
-DATABASE = 'postgresql+psycopg://user:postgres@localhost:5432/postgres'
+from sqlalchemy.orm import sessionmaker
+import os
+from dotenv import load_dotenv
 
-# Engine の作成
-Engine = create_engine(
-  DATABASE,
-  echo=False
-)
+# .envファイルの読み込み
+load_dotenv()
 
-# Sessionの作成
-session = Session(
-  autocommit = False,
-  autoflush = True,
-  bind = Engine
-)
+DATABASE_URL = os.getenv("DATABASE_URL")
 
+# SupabaseのPostgresデータベースに接続
+Engine = create_engine(DATABASE_URL, echo=True)
+SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=Engine)
 
-
-def read_table():
-    return session.query(User).all()
-
-def read_id(id):
-    return session.query(User).filter(User.id==id).first()
-            
-
-    
-def create_user(user):
-    
-    session.add(user)
-    session.commit()
-    session.refresh(user)
-    return user
-
-def add_user(user):
-    session.add(user)
-
-def delete_user(id):
-    return session.query(User).filter(User.id == id).delete()
+# セッションのエクスポート
+session = SessionLocal()

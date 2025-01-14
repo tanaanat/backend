@@ -29,6 +29,7 @@ fileConfig(config.config_file_name)
 # from myapp import mymodel
 # target_metadata = mymodel.Base.metadata
 # MetaDataオブジェクトをターゲットに設定
+
 target_metadata = Base.metadata
 
 # other values from the config, defined by the needs of env.py,
@@ -69,6 +70,9 @@ def run_migrations_online():
         prefix="sqlalchemy.",
         poolclass=pool.NullPool,
     )
+
+    # ログの詳細を増やすために echo=True を明示
+    connectable.echo = True
 
     with connectable.connect() as connection:
         context.configure(

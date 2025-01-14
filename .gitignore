@@ -11,3 +11,7 @@ wheels/
 
 *.pyc
 .env
+# バックエンド用 環境変数をgithubに上げないように
+.venv/
+__pycache__/
+.env

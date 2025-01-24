@@ -10,6 +10,9 @@ import os
 app = FastAPI()
 
 # 静的ファイルを提供（favicon.ico対応）
+if not os.path.exists("static"):
+    os.makedirs("static")
+
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 @app.get("/favicon.ico", include_in_schema=False)

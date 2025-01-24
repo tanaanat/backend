@@ -76,6 +76,8 @@ python-multipart==0.0.18
     # via fastapi
 pyyaml==6.0.2
     # via uvicorn
+requests==2.32.3
+    # via backend
 rich==13.9.4
     # via typer
 setproctitle==1.3.4

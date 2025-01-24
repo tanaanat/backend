@@ -35,9 +35,11 @@ async def db_session_middleware(request: Request, call_next):
 app.add_middleware(
     CORSMiddleware,
     allow_origins=[
-        "http://localhost:3000",
-        "http://172.22.91.9:3000",  # ローカル環境のフロントエンド
-        "https://frontend-82k0vjfs-tanaanats-projects.vercel.app"  # 本番環境のフロントエンド
+        "https://frontend-hcrovxyg3v-tanaanats-projects.vercel.app",  # VercelのフロントエンドURL
+        "https://frontend-git-main-tanaanats-projects.vercel.app",   # GitブランチデプロイURL
+        "https://frontend-zeta-six-51.vercel.app",                    # 別のデプロイドメイン
+        "http://localhost:3000",  # ローカル開発用
+        "http://127.0.0.1:3000"   # ローカルIPアクセス
     ], ##http://172.22.91.9:3000
     allow_credentials=True,
     allow_methods=["*"],

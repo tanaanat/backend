@@ -4,7 +4,17 @@ from pydantic import BaseModel
 from fastapi.middleware.cors import CORSMiddleware
 from .app.database.database import session
 from .app.model.table import User, Match, MatchComment
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
+import os
 app = FastAPI()
+
+# 静的ファイルを提供（favicon.ico対応）
+app.mount("/static", StaticFiles(directory="static"), name="static")
+
+@app.get("/favicon.ico", include_in_schema=False)
+async def favicon():
+    return FileResponse(os.path.join("static", "favicon.ico"))
 
 @app.middleware("http")
 async def db_session_middleware(request: Request, call_next):
@@ -39,8 +49,8 @@ class MatchCommentRequest(BaseModel):
 
 
 @app.get("/")
-def read_root():
-    return {"message": "Hello, World!"}
+def root():
+    return {"message": "Server is running"}
 
     
 # プレイヤー情報取得エンドポイント

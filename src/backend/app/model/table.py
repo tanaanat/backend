@@ -6,9 +6,10 @@ Base = declarative_base()
 
 class User(Base):
     __tablename__ = "users"
-    id = Column(String(26), primary_key=True)
+    id = Column(String(100), primary_key=True)  # 文字数を増やす
     game_name = Column(String(50), nullable=False)
     tag_line = Column(String(10), nullable=False)
+
 
 class Match(Base):
     __tablename__ = "matches"

@@ -39,6 +39,7 @@ app.add_middleware(
         "https://frontend-git-main-tanaanats-projects.vercel.app",   # GitブランチデプロイURL
         "https://frontend-zeta-six-51.vercel.app",                    # 別のデプロイドメイン
         "http://localhost:3000",  # ローカル開発用
+        "http://172.22.91.9:3000",
         "http://127.0.0.1:3000"   # ローカルIPアクセス
     ], ##http://172.22.91.9:3000
     allow_credentials=True,

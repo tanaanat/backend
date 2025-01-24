@@ -34,7 +34,11 @@ async def db_session_middleware(request: Request, call_next):
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"], ##http://172.22.91.9:3000
+    allow_origins=[
+        "http://localhost:3000",
+        "http://172.22.91.9:3000",  # ローカル環境のフロントエンド
+        "https://frontend-82k0vjfs-tanaanats-projects.vercel.app"  # 本番環境のフロントエンド
+    ], ##http://172.22.91.9:3000
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],

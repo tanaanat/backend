@@ -47,7 +47,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-RIOT_API_KEY = "RGAPI-f6d5b266-eb61-4d7c-a66b-1623c66ff63a"  # APIキーを.envに管理推奨
+RIOT_API_KEY = "RGAPI-fd43eb3d-30ca-4478-beff-4bb7aaba3671"  # APIキーを.envに管理推奨
 
 class RiotAccount(BaseModel):
     gameName: str
